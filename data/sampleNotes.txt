@@ -1,0 +1,23 @@
+OPERATING SYSTEMS — MEMORY MANAGEMENT
+
+Memory management is an important function of an operating system. It manages the allocation and deallocation of memory to running processes.
+
+PAGE REPLACEMENT ALGORITHMS
+
+When a page fault occurs and physical memory is full, the operating system must select a page to replace.
+
+LEAST RECENTLY USED (LRU)
+
+LRU is a page replacement algorithm that replaces the page that has not been accessed for the longest period of time.
+
+LRU uses the recent access history of pages to determine which page should be removed.
+
+FIRST IN FIRST OUT (FIFO)
+
+FIFO replaces the page that has been in memory for the longest time, regardless of how recently it was accessed.
+
+DEADLOCKS
+
+A deadlock occurs when processes are unable to proceed because each is waiting for resources held by another process.
+
+The four necessary conditions for deadlock are mutual exclusion, hold and wait, no preemption, and circular wait.

@@ -1,42 +1,68 @@
-import dotenv from "dotenv";
-import { GoogleGenAI } from "@google/genai";
-import { fileURLToPath } from "node:url";
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
-const envPath = fileURLToPath(
-  new URL("../.env", import.meta.url)
-);
+import { MODEL } from "../src/gemini.js";
+import { generateQuizFromNotes } from "../src/quizGenerator.js";
 
-const result = dotenv.config({
-  path: envPath,
-  override: true
-});
-
-if (result.error) {
-  console.error("ENV ERROR:", result.error.message);
-  process.exit(1);
-}
-
-if (!process.env.GEMINI_API_KEY?.trim()) {
-  console.error("API KEY NOT FOUND");
-  process.exit(1);
-}
-
-console.log("✅ API KEY FOUND!");
-
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY
-});
+console.log("\n===== KYROS REAL GEMINI TEST =====");
 
 try {
-  console.log("Connecting to Gemini...");
+  console.log("Gemini model:", MODEL);
 
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: "Say hello!"
+  // Read your existing working sample notes
+  const notesText = await readFile(
+    new URL("../data/sampleNotes.txt", import.meta.url),
+    "utf8"
+  );
+
+  console.log("Notes loaded:", notesText.length, "characters");
+
+  // Call Gemini to generate a real MCQ
+  const { publicQuiz, privateQuiz } =
+    await generateQuizFromNotes(
+      notesText,
+      "os_lru",
+      "LRU Page Replacement"
+    );
+
+  // Verify the public quiz
+  assert.equal(publicQuiz.options.length, 4);
+  assert.ok(publicQuiz.question);
+
+  // Ensure the answer key is not exposed
+  assert.equal("correct_index" in publicQuiz, false);
+  assert.equal("socratic_hint" in publicQuiz, false);
+  assert.equal("explanation" in publicQuiz, false);
+
+  // Verify private answer information
+  assert.ok(Number.isInteger(privateQuiz.correct_index));
+  assert.ok(privateQuiz.socratic_hint);
+  assert.ok(privateQuiz.explanation);
+
+  console.log("\n===== GENERATED AI QUESTION =====");
+  console.log("Question:", publicQuiz.question);
+
+  publicQuiz.options.forEach((option, index) => {
+    console.log(`${index + 1}. ${option}`);
   });
 
-  console.log("✅ GEMINI CONNECTED!");
-  console.log(response.text);
+  console.log("\nSocratic hint:", privateQuiz.socratic_hint);
+  console.log("Explanation:", privateQuiz.explanation);
+
+  console.log("\nSUCCESS: KYROS REAL GEMINI QUIZ WORKING!");
 } catch (error) {
-  console.error("API ERROR:", error.message);
+  console.error("\nGEMINI TEST FAILED");
+
+  const key = process.env.GEMINI_API_KEY || "";
+  const message = String(error.message || error);
+
+  console.error(
+    key ? message.replaceAll(key, "[REDACTED]") : message
+  );
+
+  if (error.cause?.code) {
+    console.error("Cause:", error.cause.code);
+  }
+
+  process.exitCode = 1;
 }
