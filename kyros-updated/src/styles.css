@@ -458,6 +458,12 @@ em {
 .ext .btn {
   margin-bottom: 2rem;
 }
+.ext-browser-note {
+  margin: 0 0 1.2rem;
+  color: var(--ink2);
+  font-size: .92rem;
+  line-height: 1.55;
+}
 .cols {
   display: grid;
   grid-template-columns: 1fr 1fr;

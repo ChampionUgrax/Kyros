@@ -10,9 +10,13 @@ export const FEATURES = [
   { icon: '🏫', title: 'Institute overview', text: 'Coaching institutes track batches, teachers and progress in one place.' },
 ];
 export const EXT_STEPS = [
-  'Download the Kyros extension.',
-  'Open your browser’s extensions page and turn on developer mode if asked.',
-  'Install it, then sign in with your Kyros account.',
-  'Start a focus session. Distracting sites pause until you finish.',
+  'Download the ZIP and extract it first. Chrome cannot load the ZIP directly.',
+  'In Google Chrome, open chrome://extensions and turn on Developer mode.',
+  'Choose Load unpacked and select the extracted folder containing manifest.json.',
+  'Keep one Kyros Focus copy enabled. To update, replace its loaded folder and click Reload on its Chrome card.',
+  'Open the same Kyros address in Google Chrome. Click the puzzle-piece Extensions button and pin Kyros Focus if you want one-click access.',
+  'Open Kyros Focus from the Extensions menu and click Connect this tab. Allow localhost access if Chrome asks.',
+  'Return to Focus. The connection indicator updates as soon as Chrome attaches the bridge.',
+  'In Focus, select Instagram and/or YouTube, then start the timer.',
 ];
-export const EXT_PERKS = ['Focus sessions that sync with your dashboard', 'Streaks and group leaderboards', 'Private by design: only focus time is shared'];
+export const EXT_PERKS = ['Instagram and YouTube site cards with checkboxes', 'Blocks matching tabs and new navigations during focus', 'Blocking automatically ends when you pause or the timer finishes'];

@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "Kyros Focus",
+  "version": "1.3.1",
+  "description": "Block distracting sites during your Kyros focus sessions.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "alarms",
+    "declarativeNetRequest",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://instagram.com/*",
+    "http://*.instagram.com/*",
+    "https://instagram.com/*",
+    "https://*.instagram.com/*",
+    "http://youtube.com/*",
+    "http://*.youtube.com/*",
+    "https://youtube.com/*",
+    "https://*.youtube.com/*",
+    "http://youtu.be/*",
+    "http://*.youtu.be/*",
+    "https://youtu.be/*",
+    "https://*.youtu.be/*",
+    "http://youtube-nocookie.com/*",
+    "http://*.youtube-nocookie.com/*",
+    "https://youtube-nocookie.com/*",
+    "https://*.youtube-nocookie.com/*"
+  ],
+  "optional_host_permissions": [
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "https://kyros.app/*",
+    "https://*.kyros.app/*"
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Connect Kyros Focus",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "blocked.html",
+        "blocked.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "version_name": "nxt.0.3"
+}

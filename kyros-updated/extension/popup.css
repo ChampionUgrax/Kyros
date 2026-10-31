@@ -1,0 +1,15 @@
+* { box-sizing: border-box; }
+body { width: 320px; margin: 0; background: #f7f8fc; color: #20263b; font: 14px/1.45 Arial, sans-serif; }
+main { padding: 18px; }
+.brand { display: flex; align-items: center; gap: 11px; margin-bottom: 20px; }
+.brand-logo { display: block; width: 38px; height: 38px; flex: 0 0 38px; border-radius: 10px; object-fit: cover; }
+.brand strong, .brand small { display: block; }
+.brand strong { font-size: 15px; }
+.brand small { margin-top: 2px; color: #70778b; font-size: 12px; }
+.status { margin: 0; font-weight: 700; }
+.detail { min-height: 42px; margin: 7px 0 15px; color: #626b80; }
+button { width: 100%; min-height: 42px; border: 0; border-radius: 10px; background: #6f5cf1; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+button:disabled { cursor: wait; opacity: .6; }
+.footnote { margin: 14px 0 0; color: #7c8395; font-size: 11px; }
+.error { color: #aa2935; }
+.success { color: #16764b; }

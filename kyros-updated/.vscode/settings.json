@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.vite": true,
+    "**/.env": true,
+    "**/.env.*": true,
+    "**/*.log": true
+  }
+}
